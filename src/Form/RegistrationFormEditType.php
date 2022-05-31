@@ -65,8 +65,11 @@ class RegistrationFormEditType extends AbstractType
                 'label' => 'Votre téléphone :',
                 'required' => true
             ])
+
+                // 'mapped' => false,
             
-            ->add('login', TextType::class, [
+
+            ->add('login', EmailType::class, [
                 'label' => 'Votre login',
                 'required' => false
             ])
@@ -84,45 +87,6 @@ class RegistrationFormEditType extends AbstractType
                 ]
             ])
             
-            ->add('message_envoyer', EntityType::class, [
-                'label' => 'Votre message envoyer :',
-                     //'placeholder' => 'Sélectionner',
-                     // looks for choices from this entity
-                     'class' =>Messages::class,
-                     // Sur quelle propriete je fais le choix
-                     'choice_label' => 'titre_message',
-                     'mapped' => false,
-
-                     // used to render a select box, check boxes or radios
-                 // 'multiple' => false,
-                    //'expanded' => true,)
-    //            'required' => false
-            ])
-            
-            ->add('message_recu', EntityType::class, [
-                'label' => 'Votre message reçu :',
-                     //'placeholder' => 'Sélectionner',
-                     // looks for choices from this entity
-                     'class' =>Messages::class,
-                     // Sur quelle propriete je fais le choix
-                     'choice_label' => 'titre_message',
-                     
-                     // used to render a select box, check boxes or radios
-                     'mapped' => false,
-
-                     // 'multiple' => true,
-                    //'expanded' => true,)
-    //            'required' => true
-            ])
-        
-            ->add('medias', MediasType::class, [
-                'mapped' => false,
-                'by_reference' => false,
-            ])
-
-
-            // ->add('confirmepassword', PasswordType::class, [
-                // 'mapped' => false,
             //     'required' => true,
             //     'label' => 'Confirmez votre mot de passe',
             // ])

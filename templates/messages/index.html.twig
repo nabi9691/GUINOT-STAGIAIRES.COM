@@ -1,71 +1,38 @@
 {% extends 'base.html.twig' %}
 
-{% block title %} Liste des messages! {% endblock %}
-
+{% block title %}Messagerie de Guinot :
+{% endblock %}
 
 {% block body %}
-
-{% block content %}
-<div>
-    <h1>
-     bienvenu(e) !
-     Messagerie de Guinot :
-     </h1>
-
-    <br /><br />
-    <hr />
-    <br />
-    <a href="{{ path('nouveauMessage_index') }}">Nouveau message </a>
-<br /><br />
-    
-    <table border="1">
-            <thead>
-                <tr>
-                    <th> Id </th>
-                    <th> Titre du message </th>
-                    <th> Contenu du message </th>
-                    <th> Creer date </th>
-                    <th> Si le message est lu </th>
-                    <th> Expediteur </th>
-                    <th> Destinataire </th>
-                    <th> Modifier </th>
-<th> Afficher </th>
-<th> Supprimer </t  h>
-</tr>
-            </thead>
-            {% for message in message %}
-<tbody>
-<tr>
-                                <td> {{ message.id }} </td>
-<td> {{ message.titreMessage }} </td>
-                <td> {{ message.contenuMessage }} </td>
-                <td> {{ message.creerDate|date("d/m/Y") }} </td>
-<td> {{ message.siMessageLu }} </td>
-                <td> {{ message.expediteur.nom }} </td>
-                <td> {{ message.destinataire.nom }} </td>
-                                <td><a href="{{ path('modifierMessage_index', {'id': message.id }) }}">Modifier</a></td>
-<td><a href="{{ path('afficherMessage_index', {'id': message.id }) }}">afficher</a></td>
-<td><a href="{{ path('supprimerMessage_index', {'id': message.id }) }}">Supprimer</a></td>
-                </tr>
-                {% else %}
-                <tr>
-                <td colspan="5">
-                    Vous n'avez pas de messages enregistré dans votre base de données !
-                </td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-
-</div>
-{% endblock %}
-
-<br/><br/>
-
-{% block footer %}
-<p>
-<a href="{{ path('accueil_index') }}"> Retour à la page d'accueil :</a><br>
-
-</p>
-{% endblock %}
+	<section class="container">
+		<div class="row">
+			<div class="col">
+				<h1>Messagerie de Guinot </h1>
+				<p>Résumé de la messagerie de Guinot :</p>
+				<p>Messages reçus : {{ app.user.destinataire|length }}</p>
+				<p>Messages envoyés : {{ app.user.expediteur|length }}</p>
+				<a class="btn btn-primary" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
+					Voir mes dossiers
+				</a>
+                <a href="{{path("messageEnvoyer_index")}}" class="btn btn-primary">Envoyer un message</a>
+			</div>
+		</div>
+	</section>
+	<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+		<div class="offcanvas-header">
+			<h2 class="offcanvas-title" id="offcanvasExampleLabel">Mes dossiers</h2>
+			<button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+		</div>
+		<div class="offcanvas-body">
+            <div class="list-group">
+                <a href="{{ path("message_index") }}" class="list-group-item list-group-item-action active">Accueil</a>
+            </div>
+            <div class="list-group">
+                <a href="{{ path("messageRecu_index") }}" class="list-group-item list-group-item-action">Boîte de réception</a>
+            </div>
+            <div class="list-group">
+                <a href="{{ path("messageEnvoyer_index") }}" class="list-group-item list-group-item-action">Eléments envoyés</a>
+            </div>
+		</div>
+	</div>
 {% endblock %}

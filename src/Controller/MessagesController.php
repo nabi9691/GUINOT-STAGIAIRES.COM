@@ -136,7 +136,7 @@ class MessagesController extends AbstractController
 
 
 /**
-     * @Route("/messagesEnvoyer", name="messagesEnvoyer_index")
+     * @Route("/messageEnvoyer", name="messageEnvoyer_index")
      */
     public function messageEnvoyer(Request $request, Messages $messages): Response
     {
@@ -146,7 +146,7 @@ class MessagesController extends AbstractController
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()){
-            $messages->setExpediteur($this->getUtilisateurs());
+            $messages->setExpediteur($this->getUser());
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($messages);
@@ -156,7 +156,7 @@ class MessagesController extends AbstractController
             return $this->redirectToRoute("message_index");
         }
 
-        return $this->render("messages/index.html.twig", [
+        return $this->render("messages/messageEnvoyer.html.twig", [
             'message' => $messages,
                         "formMessages" => $form->createView()
         ]);

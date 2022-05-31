@@ -7,6 +7,8 @@ use App\Entity\Messages;
 use App\Entity\Medias;
 
 use App\Entity\Utilisateurs;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
 
 use Symfony\Component\Form\AbstractType;
 
@@ -18,14 +20,14 @@ use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\EmailType;
+//use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+//use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 class MessagesType extends AbstractType
 {
@@ -47,9 +49,21 @@ class MessagesType extends AbstractType
                 ],
                 'required' => true
         ])
-        ->add('contenu_message', TextType::class, [
-            'label' => 'Le contenu de votre message :',
-            'required' => false
+            
+        ->add('description' ,
+                    TextareaType::class,[
+                'label' =>'Description de votre message !' ,
+                'attr' => ['placeholder' => 'Description'],
+                'constraints' => [
+                    new Length([
+                    'min' => 2 ,
+                    'max' => 700
+                ]),
+                    new NotBlank([
+                        'message' => 'Entrez votre description',
+                    ]),
+                ],
+'required' => true
         ])
         
         ->add('creer_date', BirthdayType::class, [
@@ -67,9 +81,9 @@ class MessagesType extends AbstractType
             'label' =>'Expéditeur du message :',
                  //'placeholder' => 'Sélectionner',
                  // looks for choices from this entity
-                 'class' =>Utilisateurs::class,
+                 'class' =>Messages::class,
                  // Sur quelle propriete je fais le choix
-                 'choice_label' => 'nom',
+                 'choice_label' => 'titre_message',
                  
                  // used to render a select box, check boxes or radios
              // 'multiple' => false,
@@ -81,9 +95,9 @@ class MessagesType extends AbstractType
             'label' =>'Destinataire du message :',
                  //'placeholder' => 'Sélectionner',
                  // looks for choices from this entity
-                 'class' =>Utilisateurs::class,
+                 'class' =>Messages::class,
                  // Sur quelle propriete je fais le choix
-                 'choice_label' => 'nom',
+                 'choice_label' => 'titre_message',
                  
                  // used to render a select box, check boxes or radios
              // 'multiple' => true,

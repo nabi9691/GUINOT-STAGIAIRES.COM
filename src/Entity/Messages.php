@@ -37,9 +37,9 @@ class Messages
     private $slug;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="text")
      */
-    private $contenu_message;
+    private $description;
 
     /**
      * @ORM\Column(type="datetime")
@@ -65,7 +65,7 @@ class Messages
     /**
      * @ORM\ManyToOne(targetEntity=Utilisateurs::class, inversedBy="message_recu", cascade={"persist"})
      */
-    private $destinataire;
+    private $destinataire = [];
     
     public function __construct()
     {
@@ -90,14 +90,14 @@ class Messages
         return $this;
     }
 
-    public function getContenuMessage(): ?string
+    public function getDescription(): ?string
     {
-        return $this->contenu_message;
+        return $this->description;
     }
 
-    public function setContenuMessage(string $contenu_message): self
+    public function setDescription(string $description): self
     {
-        $this->contenu_message = $contenu_message;
+        $this->description = $description;
 
         return $this;
     }
@@ -149,6 +149,7 @@ class Messages
 
         return $this;
     }
+
 
     public function getMedias(): ?Utilisateurs
     {

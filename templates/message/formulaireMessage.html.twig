@@ -1,0 +1,18 @@
+
+    
+{{ form_start(formMessages) }}
+
+Titre du message: {{ form_widget(formMessages.titre_message) }}<br>
+Description: {{ form_widget(formMessages.description) }} <br>
+Créer date: {{ form_widget(formMessages.creer_date) }} <br>
+Si le message est lu: {{ form_widget(formMessages.si_messageLu) }} <br>
+Expediteur: {{ form_widget(formMessages.expediteur) }} <br>
+Destinataire: {{ form_widget(formMessages.destinataire) }} <br>
+
+
+
+<button type="submit" class="btn btn-success">envoyer</button>
+
+
+      
+    {{ form_end(formMessages) }}

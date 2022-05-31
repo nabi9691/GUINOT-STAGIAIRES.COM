@@ -63,7 +63,7 @@ class RegistrationController extends AbstractController
                 'app_verify_email',
                 $user,
                 (new TemplatedEmail())
-                    ->from(new Address('nabiabib31@gmail.com', 'Administrateur du site retrouvaille anciens amis'))
+                    ->from(new Address('nabiabib31@gmail.com', 'Administrateur du site retrouvaille stagiairesGuinot'))
                     ->to($user->getLogin())
                     ->subject('Veuillez confirmer votre email')
                     ->htmlTemplate('registration/confirmation_email.html.twig')
@@ -78,7 +78,6 @@ class RegistrationController extends AbstractController
     }
 
 
-    
     /**
      * @Route("/register-admin", name="app_register_admin")
      */

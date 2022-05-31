@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>{% block title %}Symfony{% endblock %}</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    {% block stylesheets %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/app.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/nabi.css') }}">
+                        {% endblock %}
+</head>
+
+<body>
+    <nav>
+        <div class="nav-wrapper">
+            <div class="container">
+                
+                <!-- <a href="{{ path('accueil_index') }}"> Accueil </a> -->
+                <ul id="nav-mobile" class="right hide-on-med-and-down">
+                    
+                    {% if app.user %}
+                    <li><a href="{{ path('accueil_index') }}"> accueil </a></li>
+
+<li><a href="{{ path('pageAccueilGuinot_index') }}"> Page d'accueil de GUINOT ! </a></li>
+
+<li><a href="{{ path('medias_index') }}"> Liste des médias ! </a></li>
+<li><a href="{{ path('contacts_index') }}"> Liste des contacts ! </a></li>
+
+<li><a href="{{ path('message_index') }}"> Liste des messages : </a></li>
+<li><a href="{{ path('utilisateur_index') }}"> Liste des utilisateurs : </a></li>
+
+                    <li><a href="{{ path('app_logout') }}"> se déconnecter </a></li>
+
+
+{% if is_granted('ROLE_ADMIN') %}
+<li><a href="{{ path('utilisateur_index') }}"> Liste des utilisateurs : </a></li>
+<li><a href="{{ path('message_index') }}"> Liste des messages : </a></li>
+{% endif %}
+
+
+{% if is_granted('ROLE_ABONNER') %}
+<li><a href="{{ path('pageAccueilEspacePerso_index') }}">Page d'accueil de votre espace perso ! </a> </li>
+<li><a href="{{ path('monEspacePersonel_index') }}">Mon espace personnel : </a> </li>
+{% endif %}
+
+
+                    {% else %}
+<li><a href="{{ path('accueil_index') }}"> accueil </a></li>
+                    
+                    <li><a href="{{ path('app_login') }}"> Se connecter </a> </li>
+                    <li><a href="{{ path('app_register') }}"> Création de compte </a> </li>
+                                <li><a href="{{ path('app_logout') }}"> se déconnecter </a></li>
+
+<li><a href="{{ path('pageAccueilGuinot_index') }}"> Page d'accueil de GUINOT ! </a></li>
+
+<li><a href="{{ path('medias_index') }}"> Liste des médias ! </a></li>
+<li><a href="{{ path('contacts_index') }}"> Liste des contacts ! </a></li>
+
+<li><a href="{{ path('message_index') }}"> accéder au service de tchat public !</a></li>
+<li><a href="{{ path('utilisateur_index') }}"> Liste des utilisateurs : </a></li>
+                                            
+                                            {% endif %}
+
+                    {% if 'register' == app.request.attributes.get('_route') %}
+<li><a href="{{ path('utilisateur_index') }}"> Liste des utilisateurs : </a></li>
+
+<li><a href="{{ path('message_index') }}"> Liste des messages </a> </li>
+                    
+                    {% endif %}
+                        
+                        {% if 'login' == app.request.attributes.get('_route') %}
+<li><a href="{{ path('utilisateur_index') }}"> Liste des utilisateurs : </a></li>
+<li><a href="{{ path('message_index') }}"> Liste des messages </a> </li>
+
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    {% block content %}
+
+    {% endblock %}
+
+    {% block scripts %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+    <script type="text/javascript">
+        $('select').formSelect();
+    </script>
+    {% endblock %}
+</body>
+
+</html>

@@ -48,6 +48,8 @@
 <th> Email </th>
 <th> Message envoyer </th>
 <th> Message reçu </th>
+<th> Login </th>
+<th> Mot de passe </th>
 </tr>
 </thead>
 {% for utilisateur in utilisateur %}
@@ -64,7 +66,7 @@
 <td>{{ utilisateur.villes }}</td>
 <td>{{ utilisateur.telephone }}</td>
 <td>{{ utilisateur.email }}</td>
-<td>{{ utilisateur.messageEnvoyer.titreMessage }}</td>
+<td>{{ utilisateur.messageEnvoyer }}</td>
 <td>{{ utilisateur.messageRecu }}</td>
 <td>{{ utilisateur.login }}</td>
 <td>{{ utilisateur.password }}</td>
@@ -78,6 +80,4 @@
 {% endblock %}
 
 <br/><br/>
-
-
 {% endblock %}
